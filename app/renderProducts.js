@@ -5,7 +5,7 @@ export const renderData = async () => {
   const phoneData = await data.fetchData();
   const items = phoneData.products;
   console.log(items);
-  const output = document.querySelector(".output");
+  const output = document.querySelector(".products");
   items.forEach((item) => {
     output.insertAdjacentHTML("beforeend", productTemplate(item));
   });
