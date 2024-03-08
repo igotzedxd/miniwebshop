@@ -1,25 +1,22 @@
 /* ===== IMPORTS ===== */
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-
-
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap");
 /* ===== RESET START ===== */
-
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing:border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-    font-family: "Poppins", sans-serif;
-    scroll-behavior: smooth;
+  font-family: "Poppins", sans-serif;
+  scroll-behavior: smooth;
 }
 
 a {
-    text-decoration: none;
-    color:black;
+  text-decoration: none;
+  color: black;
 }
 
 li {
@@ -28,15 +25,89 @@ li {
 
 /* ===== RESET END ===== */
 
-
-
 /* CSS START */
 
+/* HEADER */
 
+header {
+  background: #444b7a;
+  height: 6vh;
+}
 
+header .container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  width: 90%;
+  margin: 0 auto;
+  height: 100%;
+  align-items: center;
+}
 
+header * {
+  color: gold;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 1.4rem;
+}
 
+/* FOOTER */
 
+footer {
+  background: #444b7a;
+  height: 20vh;
+  position: relative;
+  display: grid;
+  place-content: center;
+  width: 100%;
+}
 
+footer * {
+  color: gold;
+  font-family: "Source Sans 3", sans-serif;
+}
 
+footer p {
+  font-size: 0.8rem;
+}
+footer i {
+  margin-right: 5px;
+}
 
+footer img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+}
+
+.footer-container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  width: 90%;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contact {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  flex-flow: column nowrap;
+  gap: 10px;
+}
+
+.contact * {
+  text-align: center;
+}
+
+.socials {
+  width: 40%;
+  text-align: center;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  gap: 15px;
+}
