@@ -1,0 +1,11 @@
+.view-cart {
+  position: absolute;
+  right: 0;
+  top: 6vh;
+  width: 300px;
+  height: 600px;
+  border: 1px solid black;
+  z-index: 999;
+  background: #e9f2ff;
+  display: none;
+}
