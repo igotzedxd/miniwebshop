@@ -2,6 +2,14 @@ import data from "./fetchData.js";
 import { productTemplate } from "./templates.js";
 import { renderCart } from "./openCart.js";
 
+let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+let renderCartFunc;
+
+renderCart().then((result) => {
+  console.log("Result of renderCart:", result);
+  renderCartFunc = result;
+});
+
 export const renderData = async () => {
   const shirtData = await data.fetchData();
   const items = shirtData.products;
@@ -13,7 +21,6 @@ export const renderData = async () => {
   if (localStorage.getItem("cartItems") === null) {
     localStorage.setItem("cartItems", JSON.stringify([]));
   }
-  let cartItems = JSON.parse(localStorage.getItem("cartItems"));
 
   const addToCart = document.querySelectorAll(".add-cart");
   addToCart.forEach((button, index) => {
@@ -26,7 +33,8 @@ export const renderData = async () => {
         cartItems.push({ ...items[index], count: 1 });
       }
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
-      renderCart();
+      renderCartFunc.updateCart();
+      renderCartFunc.renderItems();
     });
   });
 };
