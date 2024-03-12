@@ -14,8 +14,11 @@ export const cartTemplate = (item, index) => {
     <div class="cart-item item-${index}">
       <img class="item-cart-img" src="${item.images[0]}" alt="${item.title}">
       <p class="price">${item.price} ,- Dkk</p>
-      <p class="count">Quantity: ${item.count}</p>
-      <a class="remove-cart" href="#">Remove from Cart</a>
+      <form class="choose-amount" method = "get">
+      <a class="minus minus-${index}" href="#">-</a>
+      <input class="input-amount item-${index}" type="number" name="num" min="1" max="20" value="${item.count}"><br>
+      <a class="plus plus-${index}" href="#">+</a>
+      </form>
     </div>
   `;
 };
@@ -25,8 +28,6 @@ export const favoriteTemplate = (item, index) => {
     <div class="favorite-item item-${index}">
       <img class="item-favorite-img" src="${item.images[0]}" alt="${item.title}">
       <p class="price">${item.price} ,- Dkk</p>
-            <p class="item-count">Quantity: ${item.count}</p>
-
       <a class="remove-favorite" href="#">Remove from Favorites</a>
     </div>
   `;

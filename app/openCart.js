@@ -58,16 +58,26 @@ export const renderCart = async () => {
 
   /* removes item when clicking remove item in cart */
   viewCart.addEventListener("click", (e) => {
-    if (e.target.classList.contains("remove-cart")) {
-      let index = e.target.parentElement.classList[1].split("-")[1];
+    // Ignore clicks on input fields
+    if (e.target.tagName === "INPUT") {
+      return;
+    }
+
+    if (e.target.classList[1]) {
+      let index = e.target.classList[1].split("-")[1];
       let item = cartItems[index];
 
-      // Decrease the count of the item
-      item.count--;
+      if (e.target.classList.contains("plus")) {
+        // Increase the count of the item
+        item.count++;
+      } else if (e.target.classList.contains("minus")) {
+        // Decrease the count of the item
+        item.count--;
 
-      // If the count is 0, remove the item from the array
-      if (item.count === 0) {
-        cartItems.splice(index, 1);
+        // If the count is 0, remove the item from the array
+        if (item.count === 0) {
+          cartItems.splice(index, 1);
+        }
       }
 
       // Update localStorage and the cart
@@ -75,6 +85,26 @@ export const renderCart = async () => {
       updateCart();
       console.log(item.count);
     }
+  });
+
+  viewCart.addEventListener("input", (e) => {
+    let index = e.target.classList[1].split("-")[1];
+    console.log("Index:", index);
+    let item = cartItems[index];
+
+    // Update the count of the item based on the new value of the input field
+    item.count = parseInt(e.target.value);
+    console.log("New count:", item.count);
+
+    // If the count is 0, remove the item from the array
+    if (item.count === 0) {
+      cartItems.splice(index, 1);
+    }
+
+    // Update localStorage and the cart
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    updateCart();
+    console.log(item.count);
   });
 
   return {

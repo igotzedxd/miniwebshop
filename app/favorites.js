@@ -10,6 +10,7 @@ export const renderFavoritesModal = async () => {
   const closeFavorites = document.querySelector(".close-favorites");
   const openFavorites = document.querySelector(".open-favorites");
   const favoritesOutput = document.querySelector(".favorites-output");
+  const emptyMsg = document.querySelector(".empty-favorites-msg");
 
   closeFavorites.addEventListener("click", () => {
     favoritesModal.classList.remove("show-favorites");
@@ -19,13 +20,14 @@ export const renderFavoritesModal = async () => {
     localStorage.setItem("favoriteItems", JSON.stringify([]));
   }
 
-  let favoriteItems = JSON.parse(localStorage.getItem("favoriteItems")) || [];
-
   const renderFavorites = () => {
     favoriteItems = JSON.parse(localStorage.getItem("favoriteItems")) || [];
-    favoriteItems.forEach((item) => {
-      favoritesOutput.innerHTML = "";
-      favoritesOutput.insertAdjacentHTML("beforeend", favoriteTemplate(item));
+    favoritesOutput.innerHTML = "";
+    favoriteItems.forEach((item, index) => {
+      favoritesOutput.insertAdjacentHTML(
+        "beforeend",
+        favoriteTemplate(item, index)
+      );
     });
   };
 
@@ -51,9 +53,45 @@ export const renderFavoritesModal = async () => {
     favoritesModal.classList.add("show-favorites");
   });
 
+  /* remove an item from favorites regardless of the count */
   favoritesOutput.addEventListener("click", (e) => {
     if (e.target.classList.contains("remove-favorite")) {
-      let index = e.target.parentElement.classList[1].split("-")[1];
+      let indexClass = Array.from(e.target.parentElement.classList).find(
+        (cls) => cls.startsWith("item-")
+      );
+      console.log(indexClass);
+
+      // takes fx "item-0" and returns 0... parseInt takes a string and returns a number, the value 10 is the radix, which is the base of the numeral system
+      let index = parseInt(indexClass.split("-")[1], 10);
+
+      // Remove the item from the array
+      favoriteItems.splice(index, 1);
+
+      if (favoriteItems.length === 0) {
+        emptyMsg.insertAdjacentHTML(beforeend, "No items in favorites");
+      } else {
+        emptyMsg.innerHTML = "";
+      }
+
+      // Update localStorage and the favorites
+      localStorage.setItem("favoriteItems", JSON.stringify(favoriteItems));
+      renderFavorites();
+    }
+  });
+
+  // _______________________________________________________________
+
+  /* ↓ remove and item with a count key value on the items like in cart (unnecessary for favorites) ↓ */
+
+  /*   favoritesOutput.addEventListener("click", (e) => {
+    if (e.target.classList.contains("remove-favorite")) {
+      let indexClass = Array.from(e.target.parentElement.classList).find(
+        (cls) => cls.startsWith("item-")
+      );
+      console.log(indexClass);
+
+      let index = parseInt(indexClass.split("-")[1], 10);
+
       let item = favoriteItems[index];
 
       // Check if item is not undefined
@@ -65,7 +103,7 @@ export const renderFavoritesModal = async () => {
           favoriteItems.splice(index, 1);
         }
 
-        // Update localStorage and the cart
+        // Update localStorage and the favorites
         localStorage.setItem("favoriteItems", JSON.stringify(favoriteItems));
         renderFavorites();
         console.log(item.count);
@@ -73,5 +111,5 @@ export const renderFavoritesModal = async () => {
         console.log(`No item found at index ${index}`);
       }
     }
-  });
+  }); */
 };

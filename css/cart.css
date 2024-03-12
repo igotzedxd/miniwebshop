@@ -1,3 +1,16 @@
+/* Remove arrows from number input field */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 .cart-open {
   position: absolute;
   right: 0;
@@ -52,4 +65,36 @@
 
 .show-cart-noti {
   display: block !important;
+}
+
+.choose-amount {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.minus,
+.plus {
+  margin: 0 5px;
+}
+
+.choose-amount a {
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  background: lightgrey;
+  display: grid;
+  place-content: center;
+}
+
+.input-amount {
+  width: 20px;
+  text-align: center;
+  border: none;
+  background: #e9f2ff;
+  text-align: center;
+}
+
+.input-amount:focus {
+  outline: none;
 }
