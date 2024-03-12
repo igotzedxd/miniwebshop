@@ -7,6 +7,12 @@ export const renderCart = async () => {
   const cartOpen = document.querySelector(".cart-open");
   const emptyCart = document.querySelector(".empty-cart");
 
+  cart.addEventListener("click", (e) => {
+    e.stopPropagation();
+    console.log("Cart clicked");
+    openCart();
+  });
+
   const renderItems = () => {
     viewCart.innerHTML = "";
     cartItems.forEach((item, index) => {
@@ -21,7 +27,6 @@ export const renderCart = async () => {
   };
 
   const openCart = () => {
-    console.log("Cart clicked");
     cartOpen.classList.toggle("show");
   };
 
@@ -32,13 +37,21 @@ export const renderCart = async () => {
     renderItems();
   }
 
-  cart.addEventListener("click", openCart);
-
   /* removes item when clicking remove item in cart */
   viewCart.addEventListener("click", (e) => {
     if (e.target.classList.contains("remove-cart")) {
       let index = e.target.parentElement.classList[1].split("-")[1];
-      cartItems.splice(index, 1);
+      let item = cartItems[index];
+
+      // Decrease the count of the item
+      item.count--;
+
+      // If the count is 0, remove the item from the array
+      if (item.count === 0) {
+        cartItems.splice(index, 1);
+      }
+
+      // Update localStorage and the cart
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
       updateCart();
     }
@@ -47,5 +60,6 @@ export const renderCart = async () => {
   return {
     updateCart,
     renderItems,
+    openCart,
   };
 };

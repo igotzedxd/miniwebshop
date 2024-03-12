@@ -37,4 +37,6 @@ export const renderData = async () => {
       renderCartFunc.renderItems();
     });
   });
+
+
 };

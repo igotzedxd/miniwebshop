@@ -14,6 +14,7 @@ export const cartTemplate = (item, index) => {
     <div class="cart-item item-${index}">
       <img class="item-cart-img" src="${item.images[0]}" alt="${item.title}">
       <p class="price">${item.price} ,- Dkk</p>
+      <p class="count">Quantity: ${item.count}</p>
       <a class="remove-cart" href="#">Remove from Cart</a>
     </div>
   `;

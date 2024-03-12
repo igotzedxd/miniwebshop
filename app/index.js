@@ -4,7 +4,6 @@ const app = {};
 
 app.init = () => {
   renderData();
-  renderCart();
 };
 
 app.init();
