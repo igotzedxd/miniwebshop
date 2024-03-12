@@ -19,3 +19,15 @@ export const cartTemplate = (item, index) => {
     </div>
   `;
 };
+
+export const favoriteTemplate = (item, index) => {
+  return `
+    <div class="favorite-item item-${index}">
+      <img class="item-favorite-img" src="${item.images[0]}" alt="${item.title}">
+      <p class="price">${item.price} ,- Dkk</p>
+            <p class="item-count">Quantity: ${item.count}</p>
+
+      <a class="remove-favorite" href="#">Remove from Favorites</a>
+    </div>
+  `;
+};

@@ -1,9 +1,10 @@
 import { renderData } from "./renderProducts.js";
-import { renderCart } from "./openCart.js";
+import { renderFavoritesModal } from "./favorites.js";
 const app = {};
 
 app.init = () => {
   renderData();
+  renderFavoritesModal();
 };
 
 app.init();

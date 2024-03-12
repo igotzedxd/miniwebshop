@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/cart.css">
+    <link rel="stylesheet" href="css/favorites.css">
     <title>ShirtShop</title>
     <script src="https://kit.fontawesome.com/90fad75191.js" crossorigin="anonymous"></script>
     <script type="module" src="app/index.js" defer></script>
@@ -20,7 +21,7 @@
             <a href="index.html">ShirtShop</a>
             <nav>
                 <ul>
-                    <li><a href="#">Favorites</a></li>
+                    <li><a class="open-favorites" href="#">Favorites</a></li>
 
                 </ul>
             </nav>
@@ -69,7 +70,10 @@
 
 
 
-
+        <div class="favorites">
+            <div class="favorites-output"></div>
+            <i class="fa-solid fa-x close-favorites"></i>
+        </div>
 
 </body>
 
