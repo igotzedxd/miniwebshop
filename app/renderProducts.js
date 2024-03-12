@@ -1,5 +1,6 @@
 import data from "./fetchData.js";
 import { productTemplate } from "./templates.js";
+import { renderCart } from "./openCart.js";
 
 export const renderData = async () => {
   const shirtData = await data.fetchData();
@@ -25,6 +26,7 @@ export const renderData = async () => {
         cartItems.push({ ...items[index], count: 1 });
       }
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
+      renderCart();
     });
   });
 };
