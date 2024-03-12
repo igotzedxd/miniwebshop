@@ -20,6 +20,18 @@ export const renderFavoritesModal = async () => {
     localStorage.setItem("favoriteItems", JSON.stringify([]));
   }
 
+  const checkIfEmpty = () => {
+    if (favoriteItems.length === 0) {
+      favoritesOutput.insertAdjacentHTML(
+        "beforeend",
+        `<p class="empty-favorites-msg">Your favorites are empty</p>`
+      );
+      emptyMsg.style.display = "block";
+    } else {
+      emptyMsg.style.display = "none";
+    }
+  };
+
   const renderFavorites = () => {
     favoriteItems = JSON.parse(localStorage.getItem("favoriteItems")) || [];
     favoritesOutput.innerHTML = "";
@@ -29,6 +41,7 @@ export const renderFavoritesModal = async () => {
         favoriteTemplate(item, index)
       );
     });
+    checkIfEmpty();
   };
 
   renderFavorites();
@@ -42,6 +55,7 @@ export const renderFavoritesModal = async () => {
         console.log(itemInFavorites.count);
       } else {
         favoriteItems.push({ ...items[index], count: 1 });
+        checkIfEmpty();
       }
       localStorage.setItem("favoriteItems", JSON.stringify(favoriteItems));
       renderFavorites();
@@ -67,49 +81,43 @@ export const renderFavoritesModal = async () => {
       // Remove the item from the array
       favoriteItems.splice(index, 1);
 
-      if (favoriteItems.length === 0) {
-        emptyMsg.insertAdjacentHTML(beforeend, "No items in favorites");
-      } else {
-        emptyMsg.innerHTML = "";
+      // Update localStorage and the favorites
+      localStorage.setItem("favoriteItems", JSON.stringify(favoriteItems));
+      renderFavorites();
+      checkIfEmpty();
+    }
+  });
+};
+// _______________________________________________________________
+
+/* ↓ remove and item with a count key value on the items like in cart (unnecessary for favorites) ↓ */
+
+/*   favoritesOutput.addEventListener("click", (e) => {
+  if (e.target.classList.contains("remove-favorite")) {
+    let indexClass = Array.from(e.target.parentElement.classList).find(
+      (cls) => cls.startsWith("item-")
+    );
+    console.log(indexClass);
+
+    let index = parseInt(indexClass.split("-")[1], 10);
+
+    let item = favoriteItems[index];
+
+    // Check if item is not undefined
+    if (item) {
+      item.count--;
+
+      // If the count is 0, remove the item from the array
+      if (item.count === 0) {
+        favoriteItems.splice(index, 1);
       }
 
       // Update localStorage and the favorites
       localStorage.setItem("favoriteItems", JSON.stringify(favoriteItems));
       renderFavorites();
+      console.log(item.count);
+    } else {
+      console.log(`No item found at index ${index}`);
     }
-  });
-
-  // _______________________________________________________________
-
-  /* ↓ remove and item with a count key value on the items like in cart (unnecessary for favorites) ↓ */
-
-  /*   favoritesOutput.addEventListener("click", (e) => {
-    if (e.target.classList.contains("remove-favorite")) {
-      let indexClass = Array.from(e.target.parentElement.classList).find(
-        (cls) => cls.startsWith("item-")
-      );
-      console.log(indexClass);
-
-      let index = parseInt(indexClass.split("-")[1], 10);
-
-      let item = favoriteItems[index];
-
-      // Check if item is not undefined
-      if (item) {
-        item.count--;
-
-        // If the count is 0, remove the item from the array
-        if (item.count === 0) {
-          favoriteItems.splice(index, 1);
-        }
-
-        // Update localStorage and the favorites
-        localStorage.setItem("favoriteItems", JSON.stringify(favoriteItems));
-        renderFavorites();
-        console.log(item.count);
-      } else {
-        console.log(`No item found at index ${index}`);
-      }
-    }
-  }); */
-};
+  }
+}); */

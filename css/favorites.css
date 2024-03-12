@@ -12,11 +12,12 @@ img {
   left: 0;
   margin: 0 auto;
   border: 1px solid black;
-  z-index: 9999;
+  z-index: 99;
   background: rgb(218, 218, 218);
   padding: 20px;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
   display: none;
+  overflow-y: scroll;
 }
 
 .show-favorites {
@@ -28,26 +29,31 @@ img {
   flex-flow: row wrap;
   justify-content: space-evenly;
   align-items: center;
-  height: 100%;
+  height: auto;
 }
 
 .favorite-item {
   display: flex;
   flex-flow: column nowrap;
-  width: 15%;
+  width: 150px;
   margin-bottom: 50px;
 }
 
 .close-favorites {
   position: absolute;
-  right: 0;
-  top: 0;
+  right: 10px;
+  top: 10px;
+  font-size: 1.4rem;
   color: red;
+  cursor: pointer;
 }
 
 .empty-favorites-msg {
   position: absolute;
+  inset: 0;
   top: 50vh;
+  transform: translateY(-50%);
   text-align: center;
-  left: 50vw;
+  font-size: 2rem;
+  z-index: 999;
 }

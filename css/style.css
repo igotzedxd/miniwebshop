@@ -60,6 +60,11 @@ header * {
   font-size: 1.4rem;
 }
 
+.logo-container {
+  display: grid;
+  place-content: center;
+}
+
 /* HERO */
 
 .hero {
@@ -80,16 +85,18 @@ header * {
 
 /* Products display */
 .products {
-  width: 80vw;
+  max-width: 1366px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   flex-flow: row wrap;
   margin: 0 auto;
   margin-top: 5vh;
+  gap: 50px;
 }
 
 .product {
-  max-width: 45%;
+  margin: 0 auto;
+  width: 350px;
   padding: 10px 5px;
   position: relative;
   margin-bottom: 2vh;
@@ -135,19 +142,23 @@ footer {
   width: 100%;
 }
 
-footer * {
+.footer {
+  max-width: 1366px;
+}
+
+.footer * {
   color: gold;
   font-family: "Source Sans 3", sans-serif;
 }
 
-footer p {
+.footer p {
   font-size: 0.8rem;
 }
-footer i {
+.footer i {
   margin-right: 5px;
 }
 
-footer img {
+.footer img {
   width: 40px;
   height: 40px;
   object-fit: cover;
@@ -157,7 +168,7 @@ footer img {
   position: absolute;
   inset: 0;
   display: flex;
-  width: 90%;
+  max-width: 1366px;
   margin: 0 auto;
   justify-content: space-between;
   align-items: center;
