@@ -36,3 +36,20 @@
   padding-bottom: 20px;
   border-bottom: 1px solid black;
 }
+
+.cart {
+  position: relative;
+}
+
+#cart-noti {
+  position: absolute;
+  top: -8px;
+  right: 5px;
+  color: red;
+  font-size: 1.4rem;
+  display: none;
+}
+
+.show-cart-noti {
+  display: block !important;
+}

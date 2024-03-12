@@ -6,6 +6,8 @@ export const renderCart = async () => {
   const viewCart = document.querySelector(".view-cart");
   const cartOpen = document.querySelector(".cart-open");
   const emptyCart = document.querySelector(".empty-cart");
+  const cartNoti = document.querySelector("#cart-noti");
+  const totalPrice = document.querySelector(".cart-total");
 
   cart.addEventListener("click", (e) => {
     e.stopPropagation();
@@ -18,6 +20,22 @@ export const renderCart = async () => {
     cartItems.forEach((item, index) => {
       viewCart.insertAdjacentHTML("afterbegin", cartTemplate(item, index));
     });
+    let total = cartItems.reduce(
+      (total, item) => total + item.price * item.count,
+      0
+    );
+    if (cartItems.length > 0) {
+      totalPrice.innerHTML = "";
+      totalPrice.insertAdjacentHTML(
+        "beforeend",
+        `<p>Total: ${total} ,- Dkk</p>`
+      );
+    } else {
+      while (totalPrice.firstChild) {
+        totalPrice.removeChild(totalPrice.firstChild);
+      }
+      totalPrice.insertAdjacentHTML("beforeend", `<p>Total: 0 ,- Dkk</p>`);
+    }
   };
 
   const updateCart = () => {
@@ -28,6 +46,7 @@ export const renderCart = async () => {
 
   const openCart = () => {
     cartOpen.classList.toggle("show");
+    cartNoti.classList.remove("show-cart-noti");
   };
 
   if (cartItems.length === 0) {
@@ -54,6 +73,7 @@ export const renderCart = async () => {
       // Update localStorage and the cart
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
       updateCart();
+      console.log(item.count);
     }
   });
 

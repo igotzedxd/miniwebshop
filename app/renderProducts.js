@@ -3,6 +3,7 @@ import { productTemplate } from "./templates.js";
 import { renderCart } from "./openCart.js";
 
 let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
 let renderCartFunc;
 
 renderCart().then((result) => {
@@ -14,6 +15,9 @@ export const renderData = async () => {
   const shirtData = await data.fetchData();
   const items = shirtData.products;
   const output = document.querySelector(".products");
+  const cartNoti = document.querySelector("#cart-noti");
+  const cartOpen = document.querySelector(".cart-open");
+
   items.forEach((item) => {
     output.insertAdjacentHTML("beforeend", productTemplate(item));
   });
@@ -25,6 +29,7 @@ export const renderData = async () => {
   const addToCart = document.querySelectorAll(".add-cart");
   addToCart.forEach((button, index) => {
     button.addEventListener("click", () => {
+      cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
       let itemId = items[index].id;
       let itemInCart = cartItems.find((item) => item.id === itemId);
       if (itemInCart) {
@@ -35,8 +40,16 @@ export const renderData = async () => {
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
       renderCartFunc.updateCart();
       renderCartFunc.renderItems();
+      if (itemInCart) {
+        console.log(itemInCart.count);
+      } else {
+        console.log("Item not found in cart");
+      }
+      if (cartOpen.classList.contains("show")) {
+        cartNoti.classList.remove("show-cart-noti");
+      } else {
+        cartNoti.classList.add("show-cart-noti");
+      }
     });
   });
-
-
 };
