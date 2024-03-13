@@ -6,7 +6,6 @@ export const renderCart = async () => {
   let viewCart = document.querySelector(".view-cart");
   const cartOpen = document.querySelector(".cart-open");
   const emptyCart = document.querySelector(".empty-cart");
-  const cartNoti = document.querySelector("#cart-noti");
   const totalPrice = document.querySelector(".cart-total");
 
   // Create a new cart element and replace the old one with it
@@ -18,6 +17,17 @@ export const renderCart = async () => {
   let newViewCart = viewCart.cloneNode(true);
   viewCart.parentNode.replaceChild(newViewCart, viewCart);
   viewCart = newViewCart;
+
+  const openCart = () => {
+    const cartNoti = document.querySelector("#cart-noti");
+
+    cartOpen.classList.toggle("show");
+    cartNoti.classList.remove("show-cart-noti");
+    console.log(
+      "cartNoti classList after removing show-cart-noti:",
+      cartNoti.classList
+    );
+  };
 
   cart.addEventListener("click", (e) => {
     e.stopPropagation();
@@ -52,12 +62,11 @@ export const renderCart = async () => {
   const updateCart = () => {
     cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     console.log("added or removed an item");
-    renderItems();
-  };
 
-  const openCart = () => {
-    cartOpen.classList.toggle("show");
-    cartNoti.classList.remove("show-cart-noti");
+    // Sort the cartItems array based on the id property of the items
+    cartItems.sort((a, b) => a.id - b.id);
+
+    renderItems();
   };
 
   if (cartItems.length === 0) {

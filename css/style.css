@@ -40,6 +40,10 @@ body {
 /* HEADER */
 
 header {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  width: 100vw;
   background: #444b7a;
   height: 6vh;
 }
@@ -68,7 +72,7 @@ header * {
 /* HERO */
 
 .hero {
-  margin-top: 5vh;
+  margin-top: 11vh;
 }
 
 .hero h1 {
@@ -102,6 +106,9 @@ header * {
   margin-bottom: 2vh;
 }
 
+.product:hover {
+  box-shadow: 5px 5px 5px rgba(203, 215, 218, 0.5);
+}
 .favorite {
   position: absolute;
   right: 20px;
@@ -124,13 +131,27 @@ header * {
 }
 
 .add-cart {
+  transform: translate3d(0, 0, 0);
+}
+
+.add-cart,
+.add-to-cart {
   padding: 5px;
   background: #d6f7ff;
   border-radius: 9999px;
-  box-shadow: 3px 3px 5px rgba(129, 162, 168, 0.5);
   font-size: 0.8rem;
 }
 
+.add-cart:hover,
+.add-to-cart:hover {
+  box-shadow: 3px 3px 5px rgba(129, 162, 168, 0.5);
+  transform: translateY(-2px);
+}
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
 /* FOOTER */
 
 footer {

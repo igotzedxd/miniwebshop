@@ -51,6 +51,8 @@ export const renderFavoritesModal = async () => {
 
   const renderFavorites = () => {
     favoriteItems = JSON.parse(localStorage.getItem("favoriteItems")) || [];
+
+    favoriteItems.sort((a, b) => a.id - b.id);
     favoritesOutput.innerHTML = "";
     favoriteItems.forEach((item, index) => {
       favoritesOutput.insertAdjacentHTML(
@@ -64,7 +66,8 @@ export const renderFavoritesModal = async () => {
   renderFavorites();
   const addToFavorites = document.querySelectorAll(".favorite");
   addToFavorites.forEach((button, index) => {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", (e) => {
+      e.stopPropagation();
       let itemId = items[index].id;
       let itemInFavorites = favoriteItems.find((item) => item.id === itemId);
       if (itemInFavorites) {

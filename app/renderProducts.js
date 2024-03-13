@@ -28,7 +28,9 @@ export const renderData = async () => {
   const addToCartFunc = () => {
     const addToCart = document.querySelectorAll(".add-cart");
     addToCart.forEach((button, index) => {
-      button.addEventListener("click", () => {
+      button.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
         cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
         let itemId = items[index].id;
         let itemInCart = cartItems.find((item) => item.id === itemId);
@@ -38,17 +40,18 @@ export const renderData = async () => {
           cartItems.push({ ...items[index], count: 1 });
         }
         localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        if (!cartOpen.classList.contains("show")) {
+          console.log("show class is not present");
+          cartNoti.classList.add("show-cart-noti");
+        } else {
+          cartNoti.classList.remove("show-cart-noti");
+        }
         renderCartFunc.updateCart();
         renderCartFunc.renderItems();
         if (itemInCart) {
           console.log(itemInCart.count);
         } else {
           console.log("Item not found in cart");
-        }
-        if (cartOpen.classList.contains("show")) {
-          cartNoti.classList.remove("show-cart-noti");
-        } else {
-          cartNoti.classList.add("show-cart-noti");
         }
       });
     });
