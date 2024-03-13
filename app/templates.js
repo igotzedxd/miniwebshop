@@ -36,11 +36,19 @@ export const favoriteTemplate = (item, index) => {
 
 export const productView = (item, index) => {
   return `
-    <div class="product item-${index}">
-    <img class="item-img" src="${item.images[0]}" alt="${item.title}">
-      <p class="price">${item.price} ,- Dkk</p>
-      <a class="add-cart" href="#">Add to Cart</a>
+    <div class="single-product item-${index}">
+      <img class="item-img" src="${item.images[0]}" alt="${item.title}">
       <i class="fa-regular fa-star favorite"></i>
-      </div>
+    </div>
+    <div class="single-product-info item-${index}">
+    <div class="item-info">
+    <h3 class="item-title">${item.title}</h3>
+    <p><i>${item.brand}</i></p>
+    <p>${item.description}</p>
+    </div>
+      <p class="price">${item.price} ,- Dkk</p>
+      <a class="add-to-cart" href="#">Add to Cart</a>
+      <i class="fa-regular fa-star favorite"></i>
+    </div>
   `;
 };

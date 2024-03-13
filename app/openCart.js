@@ -23,10 +23,6 @@ export const renderCart = async () => {
 
     cartOpen.classList.toggle("show");
     cartNoti.classList.remove("show-cart-noti");
-    console.log(
-      "cartNoti classList after removing show-cart-noti:",
-      cartNoti.classList
-    );
   };
 
   cart.addEventListener("click", (e) => {
@@ -36,6 +32,7 @@ export const renderCart = async () => {
   });
 
   const renderItems = () => {
+    viewCart = document.querySelector(".view-cart");
     viewCart.innerHTML = "";
     cartItems.forEach((item, index) => {
       viewCart.insertAdjacentHTML("beforeend", cartTemplate(item, index));
@@ -57,8 +54,14 @@ export const renderCart = async () => {
       }
       totalPrice.insertAdjacentHTML("beforeend", `<p>Total: 0 ,- Dkk</p>`);
     }
+    if (cartItems.length === 0) {
+      emptyCart.innerHTML = "";
+      emptyCart.insertAdjacentHTML("beforeend", "<p>Cart is empty</p>");
+    } else {
+      emptyCart.innerHTML = "";
+    }
   };
-
+  renderItems();
   const updateCart = () => {
     cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     console.log("added or removed an item");
@@ -69,15 +72,9 @@ export const renderCart = async () => {
     renderItems();
   };
 
-  if (cartItems.length === 0) {
-    emptyCart.insertAdjacentHTML("beforeend", "<p>Cart is empty</p>");
-  } else {
-    emptyCart.innerHTML = "";
-    renderItems();
-  }
-
   /* removes item when clicking remove item in cart */
   viewCart.addEventListener("click", (e) => {
+    cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     // Ignore clicks on input fields
     if (e.target.tagName === "INPUT") {
       return;
@@ -86,7 +83,7 @@ export const renderCart = async () => {
     if (e.target.classList[1]) {
       let index = e.target.classList[1].split("-")[1];
       let item = cartItems[index];
-
+      console.log(index, item);
       if (e.target.classList.contains("plus")) {
         // Increase the count of the item
         item.count++;
@@ -98,10 +95,10 @@ export const renderCart = async () => {
         if (item.count === 0) {
           cartItems.splice(index, 1);
         }
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
       }
 
       // Update localStorage and the cart
-      localStorage.setItem("cartItems", JSON.stringify(cartItems));
       updateCart();
       console.log(item.count);
     }

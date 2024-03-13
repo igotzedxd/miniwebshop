@@ -18,9 +18,11 @@ export const renderData = async () => {
   const cartNoti = document.querySelector("#cart-noti");
   const cartOpen = document.querySelector(".cart-open");
 
-  items.forEach((item, index) => {
-    output.insertAdjacentHTML("beforeend", productTemplate(item, index));
-  });
+  if (output) {
+    items.forEach((item, index) => {
+      output.insertAdjacentHTML("beforeend", productTemplate(item, index));
+    });
+  }
 
   if (localStorage.getItem("cartItems") === null) {
     localStorage.setItem("cartItems", JSON.stringify([]));
@@ -47,7 +49,6 @@ export const renderData = async () => {
           cartNoti.classList.remove("show-cart-noti");
         }
         renderCartFunc.updateCart();
-        renderCartFunc.renderItems();
         if (itemInCart) {
           console.log(itemInCart.count);
         } else {
