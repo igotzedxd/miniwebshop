@@ -68,6 +68,7 @@ export const renderCart = async () => {
 
     // Sort the cartItems array based on the id property of the items
     cartItems.sort((a, b) => a.id - b.id);
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
 
     renderItems();
   };
@@ -76,31 +77,33 @@ export const renderCart = async () => {
   viewCart.addEventListener("click", (e) => {
     cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     // Ignore clicks on input fields
-    if (e.target.tagName === "INPUT") {
+    /*    if (e.target.tagName === "INPUT") {
       return;
-    }
+    } */
 
     if (e.target.classList[1]) {
       let index = e.target.classList[1].split("-")[1];
       let item = cartItems[index];
       console.log(index, item);
-      if (e.target.classList.contains("plus")) {
-        // Increase the count of the item
-        item.count++;
-      } else if (e.target.classList.contains("minus")) {
-        // Decrease the count of the item
-        item.count--;
 
-        // If the count is 0, remove the item from the array
+      if (e.target.classList.contains("plus")) {
+        item.count++;
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+      } else if (e.target.classList.contains("minus")) {
+        item.count--;
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+
         if (item.count === 0) {
           cartItems.splice(index, 1);
+          localStorage.setItem("cartItems", JSON.stringify(cartItems));
+
+          updateCart();
+          return;
         }
-        localStorage.setItem("cartItems", JSON.stringify(cartItems));
       }
 
       // Update localStorage and the cart
       updateCart();
-      console.log(item.count);
     }
   });
 

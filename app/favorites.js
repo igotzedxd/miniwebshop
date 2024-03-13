@@ -53,6 +53,7 @@ export const renderFavoritesModal = async () => {
     favoriteItems = JSON.parse(localStorage.getItem("favoriteItems")) || [];
 
     favoriteItems.sort((a, b) => a.id - b.id);
+    localStorage.setItem("favoriteItems", JSON.stringify(favoriteItems));
     favoritesOutput.innerHTML = "";
     favoriteItems.forEach((item, index) => {
       favoritesOutput.insertAdjacentHTML(

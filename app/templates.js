@@ -15,9 +15,9 @@ export const cartTemplate = (item, index) => {
       <img class="item-cart-img" src="${item.images[0]}" alt="${item.title}">
       <p class="price">${item.price} ,- Dkk</p>
       <form class="choose-amount" method = "get">
-      <a class="minus minus-${index}" href="#">-</a>
+      <button class="minus minus-${index}" type="button">-</button>
       <input class="input-amount item-${index}" type="number" name="num" min="1" max="20" value="${item.count}"><br>
-      <a class="plus plus-${index}" href="#">+</a>
+      <button class="plus plus-${index}" type="button">+</button>
       </form>
     </div>
   `;
