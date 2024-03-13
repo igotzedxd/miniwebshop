@@ -2,12 +2,22 @@ import { cartTemplate } from "./templates.js";
 
 export const renderCart = async () => {
   let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-  const cart = document.querySelector(".cart");
-  const viewCart = document.querySelector(".view-cart");
+  let cart = document.querySelector(".cart");
+  let viewCart = document.querySelector(".view-cart");
   const cartOpen = document.querySelector(".cart-open");
   const emptyCart = document.querySelector(".empty-cart");
   const cartNoti = document.querySelector("#cart-noti");
   const totalPrice = document.querySelector(".cart-total");
+
+  // Create a new cart element and replace the old one with it
+  let newCart = cart.cloneNode(true);
+  cart.parentNode.replaceChild(newCart, cart);
+  cart = newCart;
+
+  // Do the same for viewCart
+  let newViewCart = viewCart.cloneNode(true);
+  viewCart.parentNode.replaceChild(newViewCart, viewCart);
+  viewCart = newViewCart;
 
   cart.addEventListener("click", (e) => {
     e.stopPropagation();

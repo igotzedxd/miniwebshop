@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cart.css">
+    <link rel="stylesheet" href="css/favorites.css">
+    <title>ShirtShop</title>
+    <script src="https://kit.fontawesome.com/90fad75191.js" crossorigin="anonymous"></script>
+    <script type="module" src="app/productView.js" defer></script>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <a class="logo-container" href="index.html"><img src="img/webshop-logo.png" alt="ShirtShop"></a>
+            <a href="index.html">ShirtShop</a>
+            <nav>
+                <ul>
+                    <li><a class="open-favorites" href="#">Favorites</a></li>
+
+                </ul>
+            </nav>
+            <div class="cart">
+                <a href="#"><i class="fas fa-shopping-cart"></i></a>
+                <i id="cart-noti" class="fa-solid fa-exclamation"></i>
+
+            </div>
+        </div>
+    </header>
+
+    <div class="hero">
+        <div class="container">
+            <h1>Welcome to ShirtShop!</h1>
+            <p class="hero-text">Discover the ultimate collection of shirts designed to
+                express your unique style and personality.</p>
+        </div>
+
+        <div class="cart-open">
+            <div class="view-cart"></div>
+            <p class="empty-cart"></p>
+            <p class="cart-total">0,- Dkk</p>
+            <a class="checkout-btn" href="#">Checkout</a>
+        </div>
+
+        <div class="single-product"></div>
+
+        <div class="favorites">
+            <div class="favorites-output"></div>
+            <i class="fa-solid fa-x close-favorites"></i>
+            <p class="empty-favorites-msg"></p>
+        </div>
+
+        <footer>
+            <div class="footer">
+                <img src="img/webshop-logo.png" alt="ShirtShop">
+                <div class="footer-container">
+                    <div class="contact">
+                        <h3>ShirtShop</h3>
+                        <p><i class="fa-solid fa-phone"></i>+45 12 34 56 78</p>
+                        <p><i class="fa-solid fa-location-pin"></i>Skaldehøjvej 2 <br> 8800 Viborg</p>
+                        <p><i class="fa-solid fa-envelope"></i> Shirt@shop.dk</p>
+                    </div>
+                    <div class="socials">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+        </footer>
+
+
+
+
+
+</body>
+
+</html>

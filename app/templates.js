@@ -1,12 +1,12 @@
 export const productTemplate = (item, index) => {
-  return `
-    <div class="product item-${index}">
-    <img class="item-img" src="${item.images[0]}" alt="${item.title}">
-      <p class="price">${item.price} ,- Dkk</p>
-      <a class="add-cart" href="#">Add to Cart</a>
-      <i class="fa-regular fa-star favorite"></i>
-      </div>
-  `;
+  return `<a href="productView.html?item=${index}"> 
+      <div class="product item-${index}">
+      <img class="item-img" src="${item.images[0]}" alt="${item.title}">
+        <p class="price">${item.price} ,- Dkk</p>
+        <a class="add-cart" href="#">Add to Cart</a>
+        <i class="fa-regular fa-star favorite"></i>
+        </div>
+</a> `;
 };
 
 export const cartTemplate = (item, index) => {
@@ -29,6 +29,18 @@ export const favoriteTemplate = (item, index) => {
       <img class="item-favorite-img" src="${item.images[0]}" alt="${item.title}">
       <p class="price">${item.price} ,- Dkk</p>
       <a class="remove-favorite" href="#">Remove from Favorites</a>
+      <a class="add-to-cart" href="#">Add to Cart</a>
     </div>
+  `;
+};
+
+export const productView = (item, index) => {
+  return `
+    <div class="product item-${index}">
+    <img class="item-img" src="${item.images[0]}" alt="${item.title}">
+      <p class="price">${item.price} ,- Dkk</p>
+      <a class="add-cart" href="#">Add to Cart</a>
+      <i class="fa-regular fa-star favorite"></i>
+      </div>
   `;
 };
