@@ -28,8 +28,9 @@ export const renderCart = async () => {
   const renderItems = () => {
     viewCart.innerHTML = "";
     cartItems.forEach((item, index) => {
-      viewCart.insertAdjacentHTML("afterbegin", cartTemplate(item, index));
+      viewCart.insertAdjacentHTML("beforeend", cartTemplate(item, index));
     });
+
     let total = cartItems.reduce(
       (total, item) => total + item.price * item.count,
       0
