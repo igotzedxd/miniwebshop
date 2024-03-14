@@ -13,12 +13,14 @@ export const cartTemplate = (item, index) => {
   return `
     <div class="cart-item item-${index}">
       <img class="item-cart-img" src="${item.images[0]}" alt="${item.title}">
-      <p class="price">${item.price} ,- Dkk</p>
+      <span>
       <form class="choose-amount" method = "get">
       <button class="minus minus-${index}" type="button">-</button>
       <input class="input-amount item-${index}" type="number" name="num" min="1" max="20" value="${item.count}"><br>
       <button class="plus plus-${index}" type="button">+</button>
       </form>
+      <p class="price">${item.price} ,- Dkk</p>
+      </span>
     </div>
   `;
 };
@@ -47,7 +49,7 @@ export const productView = (item, index) => {
     <p>${item.description}</p>
     </div>
       <p class="price">${item.price} ,- Dkk</p>
-      <a class="add-to-cart" href="#">Add to Cart</a>
+      <a class="add-cart" href="#">Add to Cart</a>
       <i class="fa-regular fa-star favorite"></i>
     </div>
   `;

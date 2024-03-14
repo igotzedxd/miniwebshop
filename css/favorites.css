@@ -35,8 +35,23 @@ img {
 .favorite-item {
   display: flex;
   flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: center;
   width: 150px;
   margin-bottom: 50px;
+}
+
+.item-favorite-img {
+  width: 150px;
+  height: 150px;
+}
+
+.add-to-cart {
+  margin-top: 20px;
+}
+
+.remove-favorite {
+  text-align: center;
 }
 
 .close-favorites {

@@ -13,28 +13,49 @@ input[type="number"] {
 }
 
 .cart-open {
-  position: absolute;
-  right: 0;
+  position: fixed;
   top: 6vh;
-  width: 200px;
+  right: 0;
+  transform: translateX(400px);
+  width: 400px;
+  min-height: 94vh;
   border: 1px solid black;
   border-top: none;
   z-index: 999;
-  background: #e9f2ff;
-  display: none;
-  padding: 20px;
+  background: whitesmoke;
+  display: block;
+  padding: 40px;
+  transition: transform 0.3s ease-in-out;
+  overflow: scroll;
+}
+.view-cart {
+  height: auto;
 }
 
 .show {
   display: block;
+  transform: translateX(0px);
 }
 
+.grid-cart {
+  display: grid;
+  place-content: center;
+  gap: 30px;
+}
 .item-cart-img {
   width: 150px;
 }
 
+.cart-info {
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .checkout-btn {
   display: block;
+  margin: 0 auto;
   margin-top: 40px;
   text-align: center;
   padding: 5px;
@@ -42,13 +63,27 @@ input[type="number"] {
   color: white;
   border-radius: 9999px;
   text-decoration: none;
-  width: 100%;
+  width: 250px;
 }
 
 .cart-item {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
   margin-top: 20px;
   padding-bottom: 20px;
   border-bottom: 1px solid black;
+}
+
+.cart-item span {
+  display: grid;
+  place-content: center;
+  width: 150px;
+}
+
+.price {
+  margin-top: 20px;
 }
 
 .cart {
@@ -66,6 +101,15 @@ input[type="number"] {
 
 .show-cart-noti {
   display: block !important;
+}
+
+.empty-cart {
+  text-align: center;
+}
+
+.cart-total {
+  text-align: center;
+  margin-top: 40px;
 }
 
 .choose-amount {
@@ -92,7 +136,7 @@ input[type="number"] {
   width: 20px;
   text-align: center;
   border: none;
-  background: #e9f2ff;
+  background: whitesmoke;
   text-align: center;
 }
 

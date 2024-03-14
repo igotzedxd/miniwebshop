@@ -28,6 +28,7 @@ export const renderFavoritesModal = async () => {
   const emptyMsg = document.querySelector(".empty-favorites-msg");
   const cartNoti = document.querySelector("#cart-noti");
   const cartOpen = document.querySelector(".cart-open");
+  const singleOutput = document.querySelector(".single-product-view");
 
   closeFavorites.addEventListener("click", () => {
     favoritesModal.classList.remove("show-favorites");
@@ -69,13 +70,26 @@ export const renderFavoritesModal = async () => {
   addToFavorites.forEach((button, index) => {
     button.addEventListener("click", (e) => {
       e.stopPropagation();
-      let itemId = items[index].id;
+      e.preventDefault();
+
+      let itemIndex;
+      let urlParams;
+      console.log("item-index:", itemIndex);
+      if (singleOutput) {
+        urlParams = new URLSearchParams(window.location.search);
+        itemIndex = Number(urlParams.get("item"));
+        console.log("item-index:", itemIndex);
+      } else {
+        itemIndex = index;
+      }
+
+      let itemId = items[itemIndex].id;
       let itemInFavorites = favoriteItems.find((item) => item.id === itemId);
       if (itemInFavorites) {
         itemInFavorites.count += 1;
         console.log(itemInFavorites.count);
       } else {
-        favoriteItems.push({ ...items[index], count: 1 });
+        favoriteItems.push({ ...items[itemIndex], count: 1 });
         checkIfEmpty();
       }
       localStorage.setItem("favoriteItems", JSON.stringify(favoriteItems));

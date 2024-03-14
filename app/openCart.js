@@ -38,10 +38,7 @@ export const renderCart = async () => {
       viewCart.insertAdjacentHTML("beforeend", cartTemplate(item, index));
     });
 
-    let total = cartItems.reduce(
-      (total, item) => total + item.price * item.count,
-      0
-    );
+    let total = cartItems.reduce((total, item) => total + item.price * item.count,0);
     if (cartItems.length > 0) {
       totalPrice.innerHTML = "";
       totalPrice.insertAdjacentHTML(
@@ -52,16 +49,19 @@ export const renderCart = async () => {
       while (totalPrice.firstChild) {
         totalPrice.removeChild(totalPrice.firstChild);
       }
-      totalPrice.insertAdjacentHTML("beforeend", `<p>Total: 0 ,- Dkk</p>`);
+      totalPrice.insertAdjacentHTML("beforeend", `Total: 0 ,- Dkk`);
     }
     if (cartItems.length === 0) {
       emptyCart.innerHTML = "";
-      emptyCart.insertAdjacentHTML("beforeend", "<p>Cart is empty</p>");
+      emptyCart.insertAdjacentHTML("beforeend", "Cart is empty");
+      cartOpen.classList.add("grid-cart");
     } else {
       emptyCart.innerHTML = "";
+      cartOpen.classList.remove("grid-cart");
     }
   };
   renderItems();
+  
   const updateCart = () => {
     cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     console.log("added or removed an item");
@@ -88,21 +88,16 @@ export const renderCart = async () => {
 
       if (e.target.classList.contains("plus")) {
         item.count++;
-        localStorage.setItem("cartItems", JSON.stringify(cartItems));
       } else if (e.target.classList.contains("minus")) {
         item.count--;
-        localStorage.setItem("cartItems", JSON.stringify(cartItems));
 
         if (item.count === 0) {
           cartItems.splice(index, 1);
-          localStorage.setItem("cartItems", JSON.stringify(cartItems));
-
-          updateCart();
-          return;
         }
       }
 
       // Update localStorage and the cart
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
       updateCart();
     }
   });

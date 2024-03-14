@@ -8,6 +8,7 @@
   align-items: center;
   justify-content: space-evenly;
   gap: 30px;
+  padding: 40px;
 }
 
 .single-product {
@@ -45,7 +46,7 @@ footer {
   display: none;
 }
 
-@media screen and (max-width: 825px) {
+@media screen and (max-width: 909px) {
   .single-product-info {
     display: flex;
     flex-flow: column nowrap;

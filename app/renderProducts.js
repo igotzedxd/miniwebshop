@@ -1,11 +1,9 @@
 import data from "./fetchData.js";
 import { productTemplate } from "./templates.js";
 import { renderCart } from "./openCart.js";
-
 let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
 
 let renderCartFunc;
-
 renderCart().then((result) => {
   console.log("Result of renderCart:", result);
   renderCartFunc = result;
@@ -14,9 +12,11 @@ renderCart().then((result) => {
 export const renderData = async () => {
   const shirtData = await data.fetchData();
   const items = shirtData.products;
+  console.log("items:", items);
   const output = document.querySelector(".products");
   const cartNoti = document.querySelector("#cart-noti");
   const cartOpen = document.querySelector(".cart-open");
+  const singleOutput = document.querySelector(".single-product-view");
 
   if (output) {
     items.forEach((item, index) => {
@@ -34,14 +34,30 @@ export const renderData = async () => {
         event.preventDefault();
         event.stopPropagation();
         cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-        let itemId = items[index].id;
+        console.log(cartItems);
+
+        let itemIndex = 0;
+        let urlParams;
+        console.log("item-index:", itemIndex);
+        if (singleOutput) {
+          urlParams = new URLSearchParams(window.location.search);
+          itemIndex = Number(urlParams.get("item"));
+          console.log("item-index:", itemIndex);
+        } else {
+          itemIndex = index;
+        }
+
+        let itemId = items[itemIndex].id;
         let itemInCart = cartItems.find((item) => item.id === itemId);
+        console.log("itemInCart:", itemInCart);
         if (itemInCart) {
           itemInCart.count += 1;
         } else {
-          cartItems.push({ ...items[index], count: 1 });
+          cartItems.push({ ...items[itemIndex], count: 1 });
         }
+
         localStorage.setItem("cartItems", JSON.stringify(cartItems));
+
         if (!cartOpen.classList.contains("show")) {
           console.log("show class is not present");
           cartNoti.classList.add("show-cart-noti");
@@ -58,7 +74,6 @@ export const renderData = async () => {
     });
   };
   addToCartFunc();
-
   return {
     addToCartFunc,
   };
