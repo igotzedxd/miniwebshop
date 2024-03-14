@@ -12,24 +12,28 @@ input[type="number"] {
   appearance: none; /* Standard property */
 }
 
+* {
+  box-sizing: border-box;
+}
+
 .cart-open {
   position: fixed;
   top: 6vh;
   right: 0;
   transform: translateX(400px);
   width: 400px;
-  min-height: 94vh;
+  height: 94vh;
   border: 1px solid black;
   border-top: none;
   z-index: 999;
   background: whitesmoke;
   display: block;
-  padding: 40px;
   transition: transform 0.3s ease-in-out;
-  overflow: scroll;
 }
 .view-cart {
-  height: auto;
+  height: 74vh;
+  overflow-y: scroll;
+  padding: 40px;
 }
 
 .show {
@@ -48,9 +52,14 @@ input[type="number"] {
 
 .cart-info {
   position: fixed;
-  bottom: 50px;
+  width: 100%;
+  height: 20vh;
   left: 50%;
+  z-index: 9999;
+  background: whitesmoke;
+  bottom: 0;
   transform: translateX(-50%);
+  border: 1px solid red;
 }
 
 .checkout-btn {
@@ -105,6 +114,10 @@ input[type="number"] {
 
 .empty-cart {
   text-align: center;
+  position: absolute;
+  top: 30vh;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .cart-total {
